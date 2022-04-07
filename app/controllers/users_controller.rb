@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 	def home
+		if session[:user_id]
+			@notice = "Login Name : #{current_user.name} (#{current_user.id})\n"
+		else
+			@notice = "You are not login\n"
+		end
 	end
 
 	def new
@@ -10,8 +15,9 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 		if @user.save
 			redirect_to ("/users/#{@user.id}")
+			session[:user_id] = @user.id
 		else
-			redirect_to("/users/new")
+			redirect_to("/")
 		end
 	end
 
@@ -24,6 +30,6 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			params.require(:user).permit(:name, :email, :password_digest)
+			params.require(:user).permit(:name, :email, :password)
 		end
 end

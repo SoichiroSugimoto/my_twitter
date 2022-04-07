@@ -1,0 +1,21 @@
+<% if logged_in? %>
+<p>You logged in as <%= link_to current_user.name, "/users/#{current_user.id}" %></p>
+<% end %>
+
+<li>
+	<%= link_to "Home", root_path %>
+</li>
+
+<li>
+	<%= link_to "register", "/users/new" %><br><br>
+</li>
+
+<% if logged_in? %>
+<li>
+	<%= link_to "logout", "/logout", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %><br><br>
+</li>
+<% end %>
+
+<li>
+	<%= link_to "login", login_path %><br><br>
+</li>
