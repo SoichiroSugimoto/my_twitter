@@ -5,5 +5,11 @@
 <% if current_user.id == @user.id %>
 	<%= link_to("Let's post!", "#") %>
 <% end %>
+
 <%= render '/shared/links' %>
+
+<h3>Post form<h3>
+<%= render '/shared/post_form' %>
+
 <p>POST LIST</p>
+ <%= render partial: "posts/posts_index", collection: @posts %>

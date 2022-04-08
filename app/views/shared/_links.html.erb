@@ -1,5 +1,7 @@
 <% if logged_in? %>
-<p>You logged in as <%= link_to current_user.name, "/users/#{current_user.id}" %></p>
+	<p>You logged in as <%= link_to current_user.name, "/users/#{current_user.id}" %></p>
+<% else %>
+	<p>You are not logged in</p>
 <% end %>
 
 <li>
@@ -7,15 +9,17 @@
 </li>
 
 <li>
-	<%= link_to "register", "/users/new" %><br><br>
+	<%= link_to "register", "/users/new" %>
 </li>
 
+<li>
 <% if logged_in? %>
-<li>
-	<%= link_to "logout", "/logout", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %><br><br>
-</li>
+	<%= link_to "logout", "/logout", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<% else %>
+	<%= link_to "login", login_path %>
 <% end %>
+</li>
 
 <li>
-	<%= link_to "login", login_path %><br><br>
+	<%= link_to "Users' list", users_path %>
 </li>
