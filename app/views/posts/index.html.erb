@@ -1,0 +1,5 @@
+<% @posts.each do |post| %>
+	<ol>
+		<H4><%= post.user.name %> : <%= post.body %></H4>
+	</ol>
+<% end %>

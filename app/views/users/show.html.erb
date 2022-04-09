@@ -8,8 +8,16 @@
 
 <%= render '/shared/links' %>
 
-<h3>Post form<h3>
-<%= render '/shared/post_form' %>
+<% if correct_user?(@user) %>
+	<h3>Post form<h3>
+	<%= render '/shared/post_form' %>
+<% end %>
 
 <p>POST LIST</p>
- <%= render partial: "posts/posts_index", collection: @posts %>
+<% if @user.posts.any? %>
+	<% @user.posts.each do |post| %>
+		<li><%= post.body %> | <%= link_to "delete",post , data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+	<% end %>
+<% else %>
+	<p>This user did not post anything yet</p>
+<% end %>
